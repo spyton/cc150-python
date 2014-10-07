@@ -37,6 +37,10 @@ class Solution:
         return True
 
     # 2.4
+    def quickSort(self, head, x):
+        pass
+
+    # 2.5
     def addLists(self, list1, list2):
         if list1 is None and list2 is None: return None
         if list1 is None: return list2
@@ -54,7 +58,7 @@ class Solution:
             prev.next = ListNode(carry)
         return dummy.next
 
-    # 2.5
+    # 2.6
     def findLoop(self, start):
         fast = start
         slow = start
@@ -69,41 +73,52 @@ class Solution:
             if check is slow: break
         return check
 
+    # 2.7
+    def isPalindrome(self, head):
+        pass
+
 if __name__ == "__main__":
     class ListNode:
         def __init__(self, x):
             self.val = x
             self.next = None
     s = Solution()
-    # head = ListNode(1)
-    # head.next = ListNode(1)
-    # head.next.next = ListNode(1)
-    # root = s.removeDuplicates(head)
-    # while root is not None:
-    #     print root.val,
-    #     root = root.next
-    # print "\r"
-    # ll = [ListNode(x) for x in range(1, 11)]
-    # for i in range(9):
-    #     ll[i].next = ll[i+1]
-    # head = ll[0]
-    # print s.findNthElem(head, 2)
-    # print s.findNthElem(head, 10)
-    # head = ListNode(1)
-    # head.next = node = ListNode(2)
-    # head.next.next = ListNode(3)
-    # s.deleteNode(node)
-    # while head is not None:
-    #     print head.val,
-    #     head = head.next
-    # print "\r"
-    # a = ListNode(3); a.next = ListNode(1)
-    # b = ListNode(9); b.next = ListNode(9); b.next.next = ListNode(9)
-    # res = s.addLists(a, b)
-    # while res is not None:
-    #     print res.val,
-    #     res = res.next
-    # print "\r"
+    # 2.1
+    head = ListNode(1)
+    head.next = ListNode(1)
+    head.next.next = ListNode(1)
+    root = s.removeDuplicates(head)
+    while root is not None:
+        print root.val,
+        root = root.next
+    print "\r"
+    # 2.2
+    ll = [ListNode(x) for x in range(1, 11)]
+    for i in range(9):
+        ll[i].next = ll[i+1]
+    head = ll[0]
+    print s.findNthElem(head, 2)
+    print s.findNthElem(head, 10)
+    # 2.3
+    head = ListNode(1)
+    head.next = node = ListNode(2)
+    head.next.next = ListNode(3)
+    s.deleteNode(node)
+    while head is not None:
+        print head.val,
+        head = head.next
+    print "\r"
+    # 2.4
+
+    # 2.5
+    a = ListNode(3); a.next = ListNode(1)
+    b = ListNode(9); b.next = ListNode(9); b.next.next = ListNode(9)
+    res = s.addLists(a, b)
+    while res is not None:
+        print res.val,
+        res = res.next
+    print "\r"
+    # 2.6
     ll = [ListNode(x) for x in range(1, 11)]
     for i in range(9):
         ll[i].next = ll[i+1]
@@ -111,3 +126,4 @@ if __name__ == "__main__":
     head = ll[0]
     node = s.findLoop(head)
     print node.val
+    # 2.7
