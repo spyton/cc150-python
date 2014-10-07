@@ -14,21 +14,6 @@ class Solution:
         return str[::-1]
 
     # 1.3
-    def removeDuplicates(self, str):
-        if str is None or str == "" or len(str) == 1: return str
-        dict = {}
-        ss = list(str)
-        slow = 0; fast = 0
-        while fast != len(ss):
-            if ss[fast] not in dict:
-                dict[ss[fast]] = True
-                ss[slow] = ss[fast]
-                fast +=1; slow+=1
-            else:
-                fast+=1
-        return "".join(ss[:slow])
-
-    # 1.4
     def isAnagram(self, str1, str2):
         dict1 = {}; dict2 = {}
         for c in str1:
@@ -38,13 +23,27 @@ class Solution:
         if dict1 == dict2: return True
         else: return False
     
-    # 1.5
+    # 1.4
     def replaceChar(self, str):
         ss = list(str)
         for i in range(len(ss)):
             if ss[i] == " ": ss[i] = "%20"
         return "".join(ss)
     
+    # 1.5
+    def compress(self, input):
+        if input is None or len(input) == 0 or len(input) == 1: return input
+        prev = input[:1]; cnt = 1
+        res = input[:1]
+        for c in input[1:]:
+            if c is not prev:
+                res = res + str(cnt); cnt = 1; prev = c; res = res + c
+            else:
+                cnt += 1
+        res = res + str(cnt)
+        if len(res) >= len(input): return input
+        else: return res
+
     # 1.6
     def rotateImage(self, matrix):
         return [list(reversed(x)) for x in zip(*matrix)]
@@ -71,20 +70,24 @@ class Solution:
 
 if __name__ == "__main__":
     s = Solution()
-    # print s.uniqueChar("aassbcd")
-    # print s.reverseStr("abcd")
-    # print s.removeDuplicates(None)
-    # print s.removeDuplicates("")
-    # print s.removeDuplicates("a")
-    # print s.removeDuplicates("aaabbb")
-    # print s.removeDuplicates("ababab")
-    # print s.removeDuplicates("abcd")
-    # print s.isAnagram("shen", "hsne")
-    # print s.isAnagram("yes", "nnnsye")
-    # print s.replaceChar("nathan shen")
-    # a = [[1, 2, 3], [4, 5, 6]]
-    # print s.rotateImage(a)
-    # a = [[1,1,1], [1,0,1]]
-    # s.setZero(a)
-    # print a
+    # 1.1
+    print s.uniqueChar("aassbcd")
+    # 1.2
+    print s.reverseStr("abcd")
+    # 1.3
+    print s.isAnagram("shen", "hsne")
+    print s.isAnagram("yes", "nnnsye")
+    # 1.4
+    print s.replaceChar("nathan shen")
+    # 1.5
+    print s.compress("aabcccccaaa")
+    print s.compress("abcdefg")
+    # 1.6
+    a = [[1, 2, 3], [4, 5, 6]]
+    print s.rotateImage(a)
+    # 1.7
+    a = [[1,1,1], [1,0,1]]
+    s.setZero(a)
+    print a
+    # 1.8
     print s.isRotation("waterbottle", "erbottlewat")
