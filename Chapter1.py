@@ -88,16 +88,3 @@ if __name__ == "__main__":
     # s.setZero(a)
     # print a
     print s.isRotation("waterbottle", "erbottlewat")
-
-
-
-
-
-
-
-
-
-
-
-
-
