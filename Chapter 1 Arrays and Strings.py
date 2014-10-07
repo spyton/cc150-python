@@ -71,23 +71,31 @@ class Solution:
 if __name__ == "__main__":
     s = Solution()
     # 1.1
+    print "# 1.1"
     print s.uniqueChar("aassbcd")
     # 1.2
+    print "# 1.2"
     print s.reverseStr("abcd")
     # 1.3
+    print "# 1.3"
     print s.isAnagram("shen", "hsne")
     print s.isAnagram("yes", "nnnsye")
     # 1.4
+    print "# 1.4"
     print s.replaceChar("nathan shen")
     # 1.5
+    print "# 1.5"
     print s.compress("aabcccccaaa")
     print s.compress("abcdefg")
     # 1.6
+    print "# 1.6"
     a = [[1, 2, 3], [4, 5, 6]]
     print s.rotateImage(a)
     # 1.7
+    print "# 1.7"
     a = [[1,1,1], [1,0,1]]
     s.setZero(a)
     print a
     # 1.8
+    print "# 1.8"
     print s.isRotation("waterbottle", "erbottlewat")

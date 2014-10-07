@@ -38,7 +38,19 @@ class Solution:
 
     # 2.4
     def quickSort(self, head, x):
-        pass
+        if head is None or head.next is None: return head
+        dummy = ListNode(-1); dummy.next = head
+        current = head.next; prev = head
+        while current is not None:
+            if current.val < x:
+                prev.next = current.next
+                current.next = dummy.next
+                dummy.next = current
+                current = prev.next
+            else:
+                current = current.next
+                prev = prev.next
+        return dummy.next
 
     # 2.5
     def addLists(self, list1, list2):
@@ -84,6 +96,7 @@ if __name__ == "__main__":
             self.next = None
     s = Solution()
     # 2.1
+    print "# 2.1"
     head = ListNode(1)
     head.next = ListNode(1)
     head.next.next = ListNode(1)
@@ -93,6 +106,7 @@ if __name__ == "__main__":
         root = root.next
     print "\r"
     # 2.2
+    print "# 2.2"
     ll = [ListNode(x) for x in range(1, 11)]
     for i in range(9):
         ll[i].next = ll[i+1]
@@ -100,6 +114,7 @@ if __name__ == "__main__":
     print s.findNthElem(head, 2)
     print s.findNthElem(head, 10)
     # 2.3
+    print "# 2.3"
     head = ListNode(1)
     head.next = node = ListNode(2)
     head.next.next = ListNode(3)
@@ -109,8 +124,17 @@ if __name__ == "__main__":
         head = head.next
     print "\r"
     # 2.4
-
+    print "# 2.4"
+    head = ListNode(10)
+    head.next = ListNode(5)
+    head.next.next = ListNode(3)
+    res = s.quickSort(head, 4)
+    while res is not None:
+        print res.val,
+        res = res.next
+    print "\r"
     # 2.5
+    print "# 2.5"
     a = ListNode(3); a.next = ListNode(1)
     b = ListNode(9); b.next = ListNode(9); b.next.next = ListNode(9)
     res = s.addLists(a, b)
@@ -119,6 +143,7 @@ if __name__ == "__main__":
         res = res.next
     print "\r"
     # 2.6
+    print "# 2.6"
     ll = [ListNode(x) for x in range(1, 11)]
     for i in range(9):
         ll[i].next = ll[i+1]
@@ -127,3 +152,4 @@ if __name__ == "__main__":
     node = s.findLoop(head)
     print node.val
     # 2.7
+    print "# 2.7"
