@@ -111,24 +111,3 @@ if __name__ == "__main__":
     head = ll[0]
     node = s.findLoop(head)
     print node.val
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
