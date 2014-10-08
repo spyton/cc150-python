@@ -87,7 +87,24 @@ class Solution:
 
     # 2.7
     def isPalindrome(self, head):
-        pass
+        current = head; length = 0
+        while current is not None:
+            current = current.next
+            length += 1
+        return self.isPalindromeRecur(head, length)[1]
+
+    def isPalindromeRecur(self, head, length):
+        if head is None or length == 0:
+            return (None, True)
+        elif length == 1:
+            return (head.next, True)
+        elif length == 2:
+            return (head.next.next, head.val == head.next.val)
+        res = self.isPalindromeRecur(head.next, length-2)
+        if res[0] is None or res[1] is False:
+            return res
+        else:
+            return (res[0].next, head.val == res[0].val)
 
 if __name__ == "__main__":
     class ListNode:
@@ -153,3 +170,22 @@ if __name__ == "__main__":
     print node.val
     # 2.7
     print "# 2.7"
+    head1 = ListNode(1)
+    head1.next = ListNode(2)
+    head1.next.next = ListNode(1)
+    print s.isPalindrome(head1)
+    head2 = ListNode(1)
+    head2.next = ListNode(2)
+    head2.next.next = ListNode(2)
+    head2.next.next.next = ListNode(1)
+    print s.isPalindrome(head2)
+    head1 = ListNode(1)
+    head1.next = ListNode(2)
+    head1.next.next = ListNode(3)
+    print s.isPalindrome(head1)
+    head2 = ListNode(1)
+    head2.next = ListNode(2)
+    head2.next.next = ListNode(3)
+    head2.next.next.next = ListNode(1)
+    print s.isPalindrome(head2)
+
