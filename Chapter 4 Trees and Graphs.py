@@ -76,8 +76,45 @@ class Solution:
                     current = current.parent
             return next
     # 4.7
+    def findLCA(self, root, p, q):
+        if root is None: return None
+        if root is p or root is q: return root
+        left = self.findLCA(root.left, p, q)
+        right = self.findLCA(root.right, p, q)
+        if left and right: return root
+        elif p: return left
+        else: return right
+
     # 4.8
+    def isSubtree(self, T1, T2):
+        if T2 is None: return True
+        if T1 is None: return False
+        if T1.val == T2.val:
+            if self.matchTree(T1, T2): return True
+        return self.isSubtree(T1.left, T2) or self.isSubtree(T1.right, T2)
+
+    def matchTree(self, T1, T2):
+        if T1 is None and T2 is None: return True
+        if T1 is None or T2 is None: return False
+        if T1.val != T2.val:
+            return False
+        else:
+            return self.matchTree(T1.left, T2.left) and self.matchTree(T1.right, T2.right)
+
     # 4.9
+    def findPath(self, root, target):
+        res = []
+        self.findPathRecur(res, [], root, target)
+        return res
+
+    def findPathRecur(self, res, cur, root, target):
+        if root is None: return
+        if root.val == target:
+            res.append(cur+[root.val])
+        self.findPathRecur(res, [], root.left, target)
+        self.findPathRecur(res, [], root.right, target)
+        self.findPathRecur(res, cur+[root.val], root.left, target-root.val)
+        self.findPathRecur(res, cur+[root.val], root.right, target-root.val)
 
 if __name__ == "__main__":
     class TreeNode:
@@ -139,5 +176,23 @@ if __name__ == "__main__":
     root.left.right = TreeNode(4); root.left.right.parent = root.left
     print s.findNext(root.left.right).val
     # 4.7
+    print "# 4.7"
+    root = TreeNode(1)
+    root.left = TreeNode(2); root.right = TreeNode(3)
+    p = root.left.left = TreeNode(4); q = root.left.right = TreeNode(5)
+    print s.findLCA(root, p, q).val
     # 4.8
+    print "# 4.8"
+    T1 = TreeNode(1)
+    T1.left = TreeNode(2); T1.right = TreeNode(3)
+    T1.left.left = TreeNode(4); T1.left.right = TreeNode(5)
+    T2 = TreeNode(2)
+    T2.left = TreeNode(4); T2.right = TreeNode(5)
+    print s.isSubtree(T1, T2)
     # 4.9
+    print "# 4.9"
+    root = TreeNode(1)
+    root.left = TreeNode(1)
+    root.right = TreeNode(2)
+    root.right.left = TreeNode(0)
+    print s.findPath(root, 2)
