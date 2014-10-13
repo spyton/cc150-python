@@ -27,7 +27,30 @@
 
 class Solution:
     # 5.1
+    def updateBits(self, n, m, i, j):
+        allOnes = ~0
+        left = allOnes << (j+1)
+        right = (1<<i)-1
+        mask = left | right
+        n_cleared = n & mask
+        m_shifted = m << i
+        return n_cleared | m_shifted
+
     # 5.2
+    def printBinary(self, num):
+        if num>=1 or num<=0: return "ERROR"
+        res = "0."
+        while num>0:
+            if len(res) > 32: return "ERROR"
+            r = num*2
+            if r>=1:
+                res = res+"1"
+                num = r-1
+            else:
+                res = res+"0"
+                num = r
+        return res
+
     # 5.3
     # 5.4
     # 5.5
@@ -36,8 +59,13 @@ class Solution:
     # 5.8
 
 if __name__ == "__main__":
+    s = Solution()
     # 5.1
+    print "# 5.1"
+    print '{0:b}'.format(s.updateBits(0b10000000000, 0b10011, 2, 6))
     # 5.2
+    print "# 5.2"
+    print s.printBinary(0.625)
     # 5.3
     # 5.4
     # 5.5
