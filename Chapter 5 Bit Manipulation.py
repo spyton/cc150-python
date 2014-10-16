@@ -52,9 +52,49 @@ class Solution:
         return res
 
     # 5.3
+    def getNext(self, n):
+        c, c0, c1 = n, 0, 0
+        while (c!=0) and (c&1==0):
+            c0+=1
+            c >>= 1
+        while c&1==1:
+            c1+=1
+            c >>=1
+        if (c0+c1)==31 or (c0+c1)==0:
+            return -1
+        p = c0+c1
+        n |= (1<<p)
+        n &= ~((1<<p)-1)
+        n |= (1<<(c1-1))-1
+        return n
+
+    def getPrev(self, n):
+        c, c0, c1 = n, 0, 0
+        while (c&1)==1:
+            c1+=1
+            c>>=1
+        if c == 0: return -1
+        while (c&1==0) and c != 0:
+            c0+=1
+            c>>=1
+        p = c0+c1
+        n &= ((~0)<<(p+1))
+        mask = (1<<(c1+1))-1
+        n |= mask<<(c0-1)
+        return n
+
     # 5.4
     # 5.5
+    def bitSwapRequired(self, a, b):
+        c = a^b
+        n = 0
+        while (c!=0) and (c&1==1):
+            n+=1
+            c>>=1
+        return n
     # 5.6
+    def swapOddEvenBits(self, x):
+        return (((x&0xaaaaaaaa)>>1) | ((x&0x55555555) << 1))
     # 5.7
     # 5.8
 
@@ -67,9 +107,25 @@ if __name__ == "__main__":
     print "# 5.2"
     print s.printBinary(0.625)
     # 5.3
+    print "# 5.3"
+    n = 0b11011001111100
+    print '{0:b}'.format(n)
+    print '{0:b}'.format(s.getNext(n))
+    n = 0b10011110000011
+    print '{0:b}'.format(n)
+    print '{0:b}'.format(s.getPrev(n))
     # 5.4
     # 5.5
+    print "# 5.5"
+    a = 0b1100
+    b = 0b0011
+    print '{0:b}'.format(a), '{0:b}'.format(b)
+    print s.bitSwapRequired(a, b)
     # 5.6
+    print "# 5.6"
+    a = 0b10101010
+    print "{0:b}".format(a)
+    print "{0:b}".format(s.swapOddEvenBits(a))
     # 5.7
     # 5.8
 
