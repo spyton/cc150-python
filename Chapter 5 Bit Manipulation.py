@@ -96,6 +96,11 @@ class Solution:
     def swapOddEvenBits(self, x):
         return (((x&0xaaaaaaaa)>>1) | ((x&0x55555555) << 1))
     # 5.7
+    def findMissing(self, A):
+        return self.findMissingRecur(A, 0)
+
+    def findMissingRecur(self, A, 0):
+
     # 5.8
 
 if __name__ == "__main__":
@@ -127,6 +132,10 @@ if __name__ == "__main__":
     print "{0:b}".format(a)
     print "{0:b}".format(s.swapOddEvenBits(a))
     # 5.7
+    print "# 5.7"
+    print s.findMissing([0,1,2,3,4,5,7,8,9,10])
     # 5.8
+    print "# 5.8"
+    print s.drawline([[0b00000000, 0b00000000], [0b00000000, 0b00000000]], 3, 13, 0)
 
 
