@@ -77,8 +77,84 @@ class Solution:
             self.paintFill(screen, x, y+1, oldColor, newColor)
 
     # 9.8
+    def makeChanges(self, n):
+        coins = [1, 5, 10, 25]
+        dp = [[0 for j in range(len(coins))] for j in range(n+1)]
+        for j in range(len(coins)): dp[0][j] = 1
+        for i in range(1, n+1):
+            for j in range(len(coins)):
+                # include this coin
+                if i - coins[j] >= 0:
+                    dp[i][j] += dp[i-coins[j]][j]
+                # exclude this coin
+                if j > 0: 
+                    dp[i][j] += dp[i][j-1]
+        return dp[n][len(coins)-1]
+
     # 9.9
+    def nQueen(self, n):
+        results = []
+        self.nQueenRecur(results, [], n)
+        solutions  = []
+        for res in results:
+            board = []
+            for col in res:
+                row = "."*col+"Q"+"."*(n-col-1)
+                board.append(row)
+            solutions.append(board)
+        for sol in solutions:
+            for row in sol:
+                print row
+            print "\n"
+
+    def nQueenRecur(self, res, cur, n):
+        if len(cur) == n:
+            res.append(cur)
+            return
+        for i in range(n):
+            if len(cur) == 0:
+                self.nQueenRecur(res, cur+[i], n)
+            else:
+                isDiagonal = False
+                for j in range(len(cur)):
+                    if abs(len(cur)-j)==abs(i-cur[j]):
+                        isDiagonal = True 
+                        break
+                if i not in cur and isDiagonal is False:
+                    self.nQueenRecur(res, cur+[i], n)
+
     # 9.10
+    def tallestStack(self, boxes):
+        maps = {}
+        maxheight = 0
+        maxstack = []
+        for box in boxes:
+            stack = self.tallestStackRecur(maps, boxes, box)
+            height = reduce(lambda x, y: x+y.height, stack, 0)
+            if height > maxheight:
+                maxheight = height
+                maxstack = stack
+        return maxstack
+
+    def tallestStackRecur(self, maps, boxes, bottom):
+        if bottom in maps: return maps[bottom]
+        possible = []
+        for box in boxes:
+            if (box is bottom) or (box.width >= bottom.width) or (box.height >= bottom.height) or (box.depth >= bottom.depth):
+                pass
+            else:
+                possible.append(box)
+        maxheight = 0
+        top = []
+        for p in possible:
+            stack = self.tallestStackRecur(maps, possible, p)
+            height = reduce(lambda x, y: x+y.height, stack, 0)
+            if height > maxheight:
+                maxheight = height
+                top = stack
+        maps[bottom] = top + [bottom]
+        return maps[bottom]
+
     # 9.11
 
 
@@ -107,12 +183,24 @@ if __name__ == "__main__":
     print "# 9.7"
     screen = [[0,0,0,0],[0,1,1,0],[0,1,1,0],[0,0,0,0]]
     s.paintFill(screen, 2, 2, 1, 9)
-    for s in screen: print s
+    for line in screen: print line
     # 9.8
     print "# 9.8"
+    print s.makeChanges(100)
     # 9.9
     print "# 9.9"
+    s.nQueen(4)
     # 9.10
+    class Box:
+        def __init__(self, w, h, d):
+            self.width = w
+            self.height = h
+            self.depth = d
     print "# 9.10"
+    box1 = Box(1,1,1); box2 = Box(1,2,2); box3 = Box(3,3,3); box4 = Box(4,4,4)
+    boxes = [box1,box2,box3,box4]
+    stack = s.tallestStack(boxes)
+    for s in stack:
+        print s.width, s.height, s.depth
     # 9.11
     print "# 9.11"
