@@ -191,12 +191,12 @@ if __name__ == "__main__":
     print "# 9.9"
     s.nQueen(4)
     # 9.10
+    print "# 9.10"
     class Box:
         def __init__(self, w, h, d):
             self.width = w
             self.height = h
             self.depth = d
-    print "# 9.10"
     box1 = Box(1,1,1); box2 = Box(1,2,2); box3 = Box(3,3,3); box4 = Box(4,4,4)
     boxes = [box1,box2,box3,box4]
     stack = s.tallestStack(boxes)
