@@ -75,17 +75,18 @@ class Solution:
                 j = lps[j-1]
             if pattern[i]==pattern[j]: j+=1
             lps[i] = j
-        lps.insert(0, -1)
 
         # do the search
         t, p = 0, 0 # index for text and pattern
         res = []
+        if pattern is None or len(pattern) == 0: return res
         while t<len(text):
-            while p>0 and (p==len(pattern) or text[t]!=pattern[p]): 
-                p = lps[p]
-            t+=1;p+=1
-            if p==len(pattern): 
-                res.append(t-p)
+            while p>0 and (p == len(pattern) or text[t]!=pattern[p]): 
+                if p == len(pattern): res.append(t-p)
+                p = lps[p-1]
+            if pattern[p]==text[t]: p+=1; t+=1
+            if p==0 and pattern[p]!=text[t]: t+=1
+        if p == len(pattern): res.append(t-p)
         return res
                 
     # 18.9
@@ -117,7 +118,7 @@ if __name__ == "__main__":
     print t.search("a")
     print s.KMP("banana", "ana")
     print s.KMP("banana", "a")
-    print s.KMP("ATGCATGCTGTG", "ATGATG")
+    print s.KMP("abcdabcd", "cd")
     # 18.9
     print "# 18.9"
     # 18.10
