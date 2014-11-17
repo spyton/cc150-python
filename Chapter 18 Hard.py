@@ -119,6 +119,7 @@ if __name__ == "__main__":
     print s.KMP("banana", "ana")
     print s.KMP("banana", "a")
     print s.KMP("abcdabcd", "cd")
+    print s.KMP("a", "a")
     # 18.9
     print "# 18.9"
     # 18.10
