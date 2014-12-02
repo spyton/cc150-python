@@ -78,11 +78,11 @@ class Solution:
     # 4.7
     def findLCA(self, root, p, q):
         if root is None: return None
-        if root is p or root is q: return root
+        if root == p or root == q: return root
         left = self.findLCA(root.left, p, q)
         right = self.findLCA(root.right, p, q)
         if left and right: return root
-        elif p: return left
+        elif left: return left
         else: return right
 
     # 4.8
